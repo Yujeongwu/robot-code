@@ -34,24 +34,18 @@ public:
     if (scan->ranges[0] < 0.25 || scan->ranges[20] < 0.25)
     {
       vel.linear.x = 0.;
-      vel.angular.z = -0.5;
+      vel.angular.z = -1.;
     }
-    else if(scan->ranges[20] < 0.25 || scan->ranges[40] < 0.25)
+    else if(scan->ranges[75] < 0.4 && !(scan->ranges[45] < 0.25))
     {
       vel.linear.x = 0.15;
-      vel.angular.z = -0.01;
-    }
-    else if(scan->ranges[40] < 0.25 || scan->ranges[60] < 0.25)
-    {
-       vel.linear.x = 0.15;
-      vel.angular.z = -0.01;
-    }
+      vel.angular.z = 4.;
+    }    
     else
     {
       vel.linear.x = 0.15;
       vel.angular.z = 0.;
     }
-    
     RCLCPP_INFO(rclcpp::get_logger("self_drive"),
                 "step=%d, range=%1.2f, linear=%1.2f, angular=%1.2f", step_, scan->ranges[0],
                 vel.linear.x, vel.angular.z);
